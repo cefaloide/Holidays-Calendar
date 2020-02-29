@@ -30,13 +30,13 @@ export const Calendar = ({ year, holidays }) => {
   const month = 2;
   const monthDaysList = getMonthDaysList(year, month);
   return (
-    <>
+    <div>
       <Title>Month: {month}</Title>
       <CalendarGrid>
         {monthDaysList.map(day => (
           <div key={day}>{formatDate(day)}</div>
         ))}
       </CalendarGrid>
-    </>
+    </div>
   );
 };
