@@ -11,6 +11,7 @@ describe("Calendar", () => {
 
 describe("<Calendar />", () => {
   let wrapper;
+  const currentMonth = new Date().getMonth() + 1;
   const setState = jest.fn();
   const useStateSpy = jest.spyOn(React, "useState");
   useStateSpy.mockImplementation(init => [init, setState]);
@@ -29,7 +30,7 @@ describe("<Calendar />", () => {
         .find("#prevMonth")
         .props()
         .onClick();
-      expect(setState).toHaveBeenCalledWith(1);
+      expect(setState).toHaveBeenCalledWith(currentMonth - 1);
     });
   });
 
@@ -39,7 +40,7 @@ describe("<Calendar />", () => {
         .find("#nextMonth")
         .props()
         .onClick();
-      expect(setState).toHaveBeenCalledWith(3);
+      expect(setState).toHaveBeenCalledWith(currentMonth + 1);
     });
   });
 });
