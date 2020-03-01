@@ -2,25 +2,26 @@ import React from "react";
 import styled from "styled-components";
 
 const Holiday = styled.div`
-  border: 1px solid black;
+  text-align: center;
+  padding: 0.5rem;
+  color: white;
   background: LightCoral;
   ${({ isToday }) =>
     isToday &&
     ` 
     font-weight: bold;
-    color:DodgerBlue;
-    border: 2px solid DodgerBlue;
+    color:blue;
   `}
 `;
 
 const NormalDay = styled.div`
-  border: 1px solid black;
+  text-align: center;
+  padding: 0.5rem;
   ${({ isToday }) =>
     isToday &&
     ` 
     font-weight: bold;
-    color:DodgerBlue;
-    border: 2px solid DodgerBlue;
+    color:blue;
   `}
 `;
 

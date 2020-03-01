@@ -21,15 +21,42 @@ const getMonthDaysList = (year, month) => {
   );
 };
 
-const Title = styled.div`
-  margin-bottom: 1rem;
+const CalendarContainer = styled.div`
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
-
+const CalendarHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: LightCoral;
+  border-radius: 5px 5px 0px 0px;
+`;
+const Title = styled.div`
+  display: inline-block;
+  margin: 0.5rem;
+  color: white;
+  font-weight: bold;
+`;
 const CalendarGrid = styled.div`
   display: grid;
   grid-row-gap: 10px;
   width: 600px;
   grid-template-columns: repeat(7, 1fr);
+  border-radius: 0px 0px 5px 5px;
+  padding: 5px;
+`;
+const CalendarButton = styled.button`
+  background-color: lightcoral;
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 5px;
 `;
 
 const firstMonth = 1;
@@ -65,16 +92,18 @@ export const Calendar = ({ year, holidays }) => {
     }
   };
   return (
-    <div>
-      <button id="prevMonth" type="button" onClick={prevMonth}>
-        -
-      </button>
-      <Title>
-        {months[month - 1]} {year}
-      </Title>
-      <button id="nextMonth" type="button" onClick={nextMonth}>
-        +
-      </button>
+    <CalendarContainer>
+      <CalendarHeader>
+        <CalendarButton id="prevMonth" type="button" onClick={prevMonth}>
+          &#60;
+        </CalendarButton>
+        <Title>
+          {months[month - 1]} {year}
+        </Title>
+        <CalendarButton id="nextMonth" type="button" onClick={nextMonth}>
+          &#62;
+        </CalendarButton>
+      </CalendarHeader>
       <CalendarGrid>
         {monthDaysList.map(day => {
           const foundDay = holidays.find(
@@ -96,6 +125,6 @@ export const Calendar = ({ year, holidays }) => {
           );
         })}
       </CalendarGrid>
-    </div>
+    </CalendarContainer>
   );
 };
