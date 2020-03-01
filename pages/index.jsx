@@ -19,14 +19,37 @@ const getCountries = async () => {
 
 const Index = () => {
   const currentYear = new Date().getFullYear();
-  const country = "CO";
+  const [countries, setCountries] = React.useState([]);
+  const [country, setCountry] = React.useState("ES");
   const [holidays, setHolidays] = React.useState([]);
 
   React.useEffect(() => {
     getHolidays(currentYear, country).then(setHolidays);
+    getCountries().then(setCountries);
   }, []);
 
-  return <Calendar year={currentYear} holidays={holidays} />;
+  const changeSelection = e => {
+    const selectedCountryKey = e.target.value;
+    setCountry(selectedCountryKey);
+    getHolidays(currentYear, selectedCountryKey).then(setHolidays);
+  };
+
+  return (
+    <>
+      <label htmlFor="countries">Pick the country: </label>
+      <select id="countries" onChange={changeSelection} value={country}>
+        >
+        {countries.map(country => {
+          return (
+            <option key={country.key} value={country.key}>
+              {country.value}
+            </option>
+          );
+        })}
+      </select>
+      <Calendar year={currentYear} holidays={holidays} />
+    </>
+  );
 };
 
 export default Index;
