@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import styled from "styled-components";
 
@@ -26,12 +26,32 @@ const CalendarGrid = styled.div`
   grid-template-columns: repeat(7, 1fr);
 `;
 
+const firstMonth = 1;
+const lastMonth = 12;
+
 export const Calendar = ({ year, holidays }) => {
-  const month = 2;
+  const [month, setMonth] = useState(2);
+  const [count, setCount] = useState(0);
   const monthDaysList = getMonthDaysList(year, month);
+  const prevMonth = () => {
+    if (month > firstMonth) {
+      setMonth(month - 1);
+    }
+  };
+  const nextMonth = () => {
+    if (month < lastMonth) {
+      setMonth(month + 1);
+    }
+  };
   return (
     <div>
+      <button id="prevMonth" type="button" onClick={prevMonth}>
+        -
+      </button>
       <Title>Month: {month}</Title>
+      <button id="nextMonth" type="button" onClick={nextMonth}>
+        +
+      </button>
       <CalendarGrid>
         {monthDaysList.map(day => (
           <div key={day}>{formatDate(day)}</div>
