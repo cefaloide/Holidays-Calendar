@@ -36,7 +36,9 @@ const firstMonth = 1;
 const lastMonth = 12;
 
 export const Calendar = ({ year, holidays }) => {
-  const [month, setMonth] = useState(2);
+  const today = new Date();
+  const currentMonth = today.getMonth() + 1;
+  const [month, setMonth] = useState(currentMonth);
   const monthDaysList = getMonthDaysList(year, month);
   const prevMonth = () => {
     if (month > firstMonth) {
@@ -63,7 +65,19 @@ export const Calendar = ({ year, holidays }) => {
             holiday => holiday.date === formatToYearMonthDay(day)
           );
 
-          return <Day key={day} day={formatDate(day)} holiday={foundDay} />;
+          const isToday =
+            formatToYearMonthDay(today) === formatToYearMonthDay(day)
+              ? true
+              : false;
+
+          return (
+            <Day
+              key={day}
+              day={formatDate(day)}
+              holiday={foundDay}
+              isToday={isToday}
+            />
+          );
         })}
       </CalendarGrid>
     </div>
