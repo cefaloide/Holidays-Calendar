@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import styled from "styled-components";
+import { Day } from "./day";
 
 const getMonthDays = (year, month) => new Date(year, month, 0).getDate();
 
 const getDate = (year, month, day) => new Date(year, month, day);
 
-const formatDate = date => dayjs(date).format("DD");
+const formatDate = date => {
+  return dayjs(date).format("DD");
+};
+const formatToYearMonthDay = date => {
+  return dayjs(date).format("YYYY-MM-DD");
+};
 
 const getMonthDaysList = (year, month) => {
   const monthDays = getMonthDays(year, month);
@@ -31,7 +37,6 @@ const lastMonth = 12;
 
 export const Calendar = ({ year, holidays }) => {
   const [month, setMonth] = useState(2);
-  const [count, setCount] = useState(0);
   const monthDaysList = getMonthDaysList(year, month);
   const prevMonth = () => {
     if (month > firstMonth) {
@@ -53,9 +58,13 @@ export const Calendar = ({ year, holidays }) => {
         +
       </button>
       <CalendarGrid>
-        {monthDaysList.map(day => (
-          <div key={day}>{formatDate(day)}</div>
-        ))}
+        {monthDaysList.map(day => {
+          const foundDay = holidays.find(
+            holiday => holiday.date === formatToYearMonthDay(day)
+          );
+
+          return <Day key={day} day={formatDate(day)} holiday={foundDay} />;
+        })}
       </CalendarGrid>
     </div>
   );
