@@ -38,6 +38,20 @@ const lastMonth = 12;
 export const Calendar = ({ year, holidays }) => {
   const today = new Date();
   const currentMonth = today.getMonth() + 1;
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
   const [month, setMonth] = useState(currentMonth);
   const monthDaysList = getMonthDaysList(year, month);
   const prevMonth = () => {
@@ -55,7 +69,9 @@ export const Calendar = ({ year, holidays }) => {
       <button id="prevMonth" type="button" onClick={prevMonth}>
         -
       </button>
-      <Title>Month: {month}</Title>
+      <Title>
+        {months[month - 1]} {year}
+      </Title>
       <button id="nextMonth" type="button" onClick={nextMonth}>
         +
       </button>
