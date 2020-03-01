@@ -18,15 +18,15 @@ const getCountries = async () => {
 };
 
 const Index = () => {
-  const year = 2020;
+  const currentYear = new Date().getFullYear();
   const country = "CO";
   const [holidays, setHolidays] = React.useState([]);
 
   React.useEffect(() => {
-    getHolidays(year, country).then(setHolidays);
+    getHolidays(currentYear, country).then(setHolidays);
   }, []);
 
-  return <Calendar year={year} holidays={holidays} />;
+  return <Calendar year={currentYear} holidays={holidays} />;
 };
 
 export default Index;
