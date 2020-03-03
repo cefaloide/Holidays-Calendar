@@ -12,6 +12,7 @@ const Holiday = styled.div`
     font-weight: bold;
     color:blue;
   `}
+  min-height:70px;
 `;
 
 const NormalDay = styled.div`
@@ -23,6 +24,7 @@ const NormalDay = styled.div`
     font-weight: bold;
     color:blue;
   `}
+  min-height:70px;
 `;
 
 export const Day = ({ day, holiday, isToday }) => {

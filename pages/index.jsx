@@ -2,6 +2,7 @@ import React from "react";
 import fetch from "isomorphic-unfetch";
 import { Calendar } from "../components/calendar";
 import styled from "styled-components";
+import Head from "next/head";
 
 /*** Nager.Date Public Holiday API (https://date.nager.at/Api) ***/
 
@@ -22,6 +23,7 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Montserrat", sans-serif;
 `;
 const CountrySelect = styled.div`
   margin: 5px;
@@ -46,6 +48,13 @@ const Index = () => {
 
   return (
     <AppContainer>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+          rel="stylesheet"
+          key="google-font-cabin"
+        />
+      </Head>
       <CountrySelect>
         <label htmlFor="countries">Pick the country: </label>
         <select id="countries" onChange={changeSelection} value={country}>
